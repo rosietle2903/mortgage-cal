@@ -9,6 +9,7 @@ class Form extends Component {
        loanAmount: '', 
        interestRate: '',
        numOfyears: '',
+       finalValue: '',
     }
   }
   
@@ -31,9 +32,9 @@ class Form extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault(); 
-    const finalValue = Number(this.state.loanAmount) + Number(this.state.interestRate); 
-    console.log(finalValue); 
-    
+    this.setState({
+      finalValue: this.state.loanAmount + this.state.interestRate,  
+    })  
   }
   
     render() {
