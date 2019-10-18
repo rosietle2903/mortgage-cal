@@ -1,9 +1,10 @@
 import React, { Component }  from 'react';
 import './App.css'; 
 import { directive } from '@babel/types';
-import {Bar} from 'react-chartjs-2';
+import {Bar, Doughnut} from 'react-chartjs-2';
 import Chart from '/Users/rosiele/Documents/mortage-cal/src/components/Chart.js'
-
+import 'react-bulma-components/dist/react-bulma-components.min.css';
+import { Button } from 'react-bulma-components';
 
 class Form extends Component {
 
@@ -42,39 +43,51 @@ class Form extends Component {
     })
   }
   
+  
     render() {
       return (
+        
         <form 
         onSubmit={this.handleSubmit}>
           <div>
-  
-            <label> Rate: </label>
+          <h3>Mortgage Calculator</h3>
+            <label> Mortgage Amount: </label>
             <input 
+            class="input is-success is-small"
             type="number" 
             value={this.state.loanAmount} 
             onChange={this.handleLoanAmount}/>
   
-            <label> Period: </label>
+            <label> Interest rate (%): </label>
             <input 
+            class="input is-success is-small"
             type="number"
             value={this.state.interestRate}
             onChange={this.handeInterestRate} />
   
-            <label> Present Value: </label>
+            <label> Mortgage period (years) </label>
             <input 
+            class="input is-success is-small"
             type="number"
             value={this.state.numOfyears}
             onChange={this.handleNum} />
           </div>
-          <button>Calculate</button>
-          <Chart data={this.state.finalValue}/> 
-          <h1>
-            {this.state.finalValue}
-          </h1>
+          <FinalValueComponent mortgageValue={this.state.finalValue}/>
+          <Chart chartData={this.state.finalValue} />
+          <Button color="success"> Calculate </Button>
+          
         </form>
       )
     }
   }
+
+  class FinalValueComponent extends Component { //this comonent renders the final value, it takes in a prop as paramenter
+    render() {
+      return <h1>Your total value: {this.props.mortgageValue}</h1>;
+    }
+  }
+
   
-  export default Form
   
+  export default Form; 
+
